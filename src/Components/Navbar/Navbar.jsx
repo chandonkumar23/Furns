@@ -44,7 +44,7 @@ const Navbar = () => {
                     </svg>
                 </Box>
             </Box>
-            <Box sx={{ backgroundColor: "#00000024", height: "75px", mt: "30px", display: "flex", alignItems: "center", justifyContent: "center", gap: "40px" }}>
+            <Box sx={{ backgroundColor: "rgb(226, 226, 226)", height: "75px", mt: "30px", display: "flex", alignItems: "center", justifyContent: "center", gap: "40px" }}>
                 <Typography
                     sx={{
                         transition: "color 0.5s",

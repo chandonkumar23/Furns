@@ -83,88 +83,165 @@ const HomeProduct = () => {
                     }}
                 >
                     {filteredProducts.map((product) => (
+                    <Box
+                    key={product.id}
+                    sx={{
+                        position: "relative",
+                        width: "300px",
+                        "&:hover .fullscreen-icon": { display: "flex" }, // Show fullscreen icon on hover
+                        "&:hover .continue-btn": { display: "flex" }, // Show Add to Cart button on hover
+                    }}
+                >
+                    <Box
+                        sx={{
+                            width: "300px",
+                            height: "400px",
+                            backgroundColor: "#D9D9D957",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            borderRadius: "10px",
+                            position: "relative",
+                        }}
+                    >
                         <Box
-                            key={product.id}
+                            component="img"
+                            src={product.image}
+                            alt={product.name}
                             sx={{
-                                position: "relative",
-                                width: "300px",
-                                "&:hover .fullscreen-icon": { display: "flex" },
-                                "&:hover .continue-btn": { display: "flex" },
+                                maxWidth: "300px",
+                                maxHeight: "300px",
+                                objectFit: "contain",
+                            }}
+                        />
+                
+                        {/* Favorite Icon (Always Visible) */}
+                        <Box
+                            className="favorite-icon"
+                            sx={{
+                                position: "absolute",
+                                top: "10px",
+                                right: "10px",
+                                width: "40px",
+                                height: "40px",
+                                backgroundColor: "#FFFFFF",
+                                borderRadius: "50%",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                                cursor: "pointer",
+                                zIndex: 2,
+                                transition: "background-color 0.3s ease",
+                                "&:hover": {
+                                    backgroundColor: "#FA6813", // Change background color to red on hover
+                                },
+                                "&:hover .favorite-tooltip": { opacity: 1, transform: "translateY(0px)" }, // Show tooltip on hover
                             }}
                         >
+                            <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.2913 2.82786C19.7805 2.24838 19.1741 1.78869 18.5066 1.47506C17.8392 1.16143 17.1238 1 16.4013 1C15.6788 1 14.9634 1.16143 14.2959 1.47506C13.6285 1.78869 13.022 2.24838 12.5113 2.82786L11.4513 4.02993L10.3913 2.82786C9.3596 1.65789 7.96032 1.00061 6.50129 1.00061C5.04226 1.00061 3.64298 1.65789 2.61129 2.82786C1.5796 3.99783 1 5.58465 1 7.23924C1 8.89383 1.5796 10.4807 2.61129 11.6506L3.67129 12.8527L11.4513 21.6755L19.2313 12.8527L20.2913 11.6506C20.8023 11.0714 21.2076 10.3837 21.4842 9.62678C21.7608 8.86986 21.9031 8.05857 21.9031 7.23924C21.9031 6.41992 21.7608 5.60862 21.4842 4.8517C21.2076 4.09478 20.8023 3.40707 20.2913 2.82786Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                
+                            {/* Tooltip for Favorite Icon */}
                             <Box
+                                className="favorite-tooltip"
                                 sx={{
-                                    width: "300px",
-                                    height: "400px",
-                                    backgroundColor: "#D9D9D957",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "10px",
-                                    position: "relative",
+                                    position: "absolute",
+                                    right: "50px",
+                                    top: "50%",
+                                    transform: "translateY(-50%)",
+                                    backgroundColor: "black",
+                                    color: "white",
+                                    padding: "5px 10px",
+                                    borderRadius: "5px",
+                                    fontSize: "12px",
+                                    whiteSpace: "nowrap",
+                                    opacity: 0,
+                                    transition: "opacity 0.3s ease, transform 0.3s ease",
                                 }}
                             >
-                                <Box
-                                    component="img"
-                                    src={product.image}
-                                    alt={product.name}
-                                    sx={{
-                                        maxWidth: "300px",
-                                        maxHeight: "300px",
-                                        objectFit: "contain",
-                                    }}
-                                />
-
-                                {/* Fullscreen Icon */}
-                                <Box
-                                    className="fullscreen-icon"
-                                    sx={{
-                                        width: "50px",
-                                        height: "50px",
-                                        backgroundColor: "#FFFFFF",
-                                        borderRadius: "50%",
-                                        display: "none",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        position: "absolute",
-                                        top: "10px",
-                                        right: "10px",
-                                        boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-                                        cursor: "pointer",
-                                    }}
-                                >
-                                    <FullscreenIcon />
-                                </Box>
-
-                                {/* Continue Button */}
-                                <Button
-                                    variant="contained"
-                                    className="continue-btn"
-                                    sx={{
-                                        display: "none",
-                                        position: "absolute",
-                                        bottom: "10px",
-                                        left: "50%",
-                                        transform: "translateX(-50%)",
-                                        backgroundColor: "#FFFFFF",
-                                        color: "black",
-                                        "&:hover": { color: "#FA6813" },
-                                    }}
-                                >
-                                    Add to Cart
-                                </Button>
-                            </Box>
-
-                            {/* Product Details */}
-                            <Box>
-                                <Typography sx={{ textAlign: "center", fontWeight: "400", fontSize: "30px", mt: "10px" }}>
-                                    {product.name}
-                                </Typography>
-                                <Typography sx={{ textAlign: "center", fontWeight: "400", fontSize: "25px", mt: "10px" }}>
-                                    {product.oldPrice && <s style={{ color: "#877B7B" }}>${product.oldPrice}</s>} ${product.price}
-                                </Typography>
+                                Add to Wishlist
                             </Box>
                         </Box>
+                
+                        {/* Fullscreen Icon (Only Visible on Hover, Positioned Below Favorite Icon) */}
+                        <Box
+                            className="fullscreen-icon"
+                            sx={{
+                                position: "absolute",
+                                top: "55px",
+                                right: "10px",
+                                width: "40px",
+                                height: "40px",
+                                backgroundColor: "#FFFFFF",
+                                borderRadius: "50%",
+                                display: "none", // Hidden by default
+                                justifyContent: "center",
+                                alignItems: "center",
+                                boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                                cursor: "pointer",
+                                transition: "background-color 0.3s ease",
+                                "&:hover": {
+                                    backgroundColor: "#FA6813", // Change background color to red on hover
+                                },
+                                "&:hover .fullscreen-tooltip": { opacity: 1, transform: "translateY(0px)" }, // Show tooltip on hover
+                            }}
+                        >
+                            <FullscreenIcon sx={{ color: "black" }} />
+                
+                            {/* Tooltip for Fullscreen Icon */}
+                            <Box
+                                className="fullscreen-tooltip"
+                                sx={{
+                                    position: "absolute",
+                                    right: "50px",
+                                    top: "50%",
+                                    transform: "translateY(-50%)",
+                                    backgroundColor: "black",
+                                    color: "white",
+                                    padding: "5px 10px",
+                                    borderRadius: "5px",
+                                    fontSize: "12px",
+                                    whiteSpace: "nowrap",
+                                    opacity: 0,
+                                    transition: "opacity 0.3s ease, transform 0.3s ease",
+                                }}
+                            >
+                                Quick View
+                            </Box>
+                        </Box>
+                
+                        {/* Add to Cart Button (Only Visible on Hover) */}
+                        <Button
+                            variant="contained"
+                            className="continue-btn"
+                            sx={{
+                                display: "none", // Hidden by default
+                                position: "absolute",
+                                bottom: "10px",
+                                left: "50%",
+                                transform: "translateX(-50%)",
+                                backgroundColor: "#FFFFFF",
+                                color: "black",
+                                "&:hover": { color: "#FA6813" },
+                            }}
+                        >
+                            Add to Cart
+                        </Button>
+                    </Box>
+                
+                    {/* Product Details */}
+                    <Box>
+                        <Typography sx={{ textAlign: "center", fontWeight: "400", fontSize: "30px", mt: "10px" }}>
+                            {product.name}
+                        </Typography>
+                        <Typography sx={{ textAlign: "center", fontWeight: "400", fontSize: "25px", mt: "10px" }}>
+                            {product.oldPrice && <s style={{ color: "#877B7B" }}>${product.oldPrice}</s>} ${product.price}
+                        </Typography>
+                    </Box>
+                </Box>
+                             
                     ))}
                 </Box>
             </Container>
