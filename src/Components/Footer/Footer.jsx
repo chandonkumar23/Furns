@@ -122,7 +122,7 @@ const Footer = () => {
                 </Box>
             </Box>
             <Box sx={{ backgroundColor: "black", textAlign: "center", py: 2, color: 'white', bottom: 0, width: "100%" }}>
-                <Typography variant="body2">© 2021, Furns. Made with Chandon Kumar.</Typography>
+                <Typography variant="body2">© 2025, Furns. Made with Chandon Kumar.</Typography>
             </Box>
         </Box>
     );
